@@ -1,8 +1,8 @@
+import {Todo, TodoFilter, TodoStatus} from "../../container/TodoContainer";
 import React, {ChangeEvent, FormEvent} from "react";
-import {Todo, TodoFilter, TodoStatus} from "../container/TodoContainer";
 
 
-interface TodoPageProps {
+export interface TodoPageProps {
     todoList: Array<Todo>,
     filter: TodoFilter,
     text: string,
@@ -13,7 +13,6 @@ interface TodoPageProps {
     handleCompleteButtonClick: (id: number) => void
     handleActiveButtonClick: (id: number) => void
 }
-
 
 export class TodoPage extends React.Component<TodoPageProps> {
 

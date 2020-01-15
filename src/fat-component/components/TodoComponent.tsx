@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent} from "react";
-import {TodoPage} from "../component/TodoPage";
+
 
 export interface Todo {
     id: number,
@@ -17,8 +17,9 @@ export enum TodoFilter {
     COMPLETE = "COMPLETE",
     ACTIVE = "ACTIVE",
     ALL = "ALL"
-
 }
+
+export const TodoFilters = [TodoFilter.ALL, TodoFilter.ACTIVE, TodoFilter.COMPLETE]
 
 
 export interface TodoState {
@@ -27,7 +28,7 @@ export interface TodoState {
     text: string
 }
 
-export class TodoContainer extends React.Component<any, TodoState> {
+export class TodoComponent extends React.Component<any, TodoState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -69,7 +70,7 @@ export class TodoContainer extends React.Component<any, TodoState> {
      * @param TODOのID
      */
     handleCompleteButtonClick(id: number) {
-        const todo = this.state.todoList.find(todo => todo.id === id) as Todo
+        const todo = this.state.todoList.find(todo => todo.id === id) as Todo;
         todo.status = TodoStatus.COMPLETE;
         this.setState({...this.state})
     }
@@ -79,7 +80,7 @@ export class TodoContainer extends React.Component<any, TodoState> {
      * @param id TODOのID
      */
     handleDeleteButtonClick(id: number) {
-        const todoList = this.state.todoList.filter(todo => todo.id !== id)
+        const todoList = this.state.todoList.filter(todo => todo.id !== id);
         this.setState({...this.state, todoList: todoList})
     }
 
@@ -88,7 +89,7 @@ export class TodoContainer extends React.Component<any, TodoState> {
      * @param id TODOのID
      */
     handleActiveButtonClick(id: number) {
-        const todo = this.state.todoList.find(todo => todo.id === id) as Todo
+        const todo = this.state.todoList.find(todo => todo.id === id) as Todo;
         todo.status = TodoStatus.ACTIVE;
         this.setState({...this.state})
     }
@@ -102,17 +103,49 @@ export class TodoContainer extends React.Component<any, TodoState> {
         return this.state.todoList.filter(todo => todo.status.toString() === this.state.filter.toString())
     }
 
-    public render() {
+    render() {
+        const todo = this.state.todoList.map((t,index) => <li key={index}>
+                <span style={{textDecoration: t.status === TodoStatus.COMPLETE ? "line-through" : "unset"}}>{t.text}</span>
+                {t.status === TodoStatus.ACTIVE &&
+                <button onClick={() => this.handleCompleteButtonClick(t.id)}>完了</button>
+                }
+                {t.status === TodoStatus.COMPLETE &&
+                <button onClick={() => this.handleActiveButtonClick(t.id)}>未完了</button>
+                }
+                <button onClick={() => this.handleDeleteButtonClick(t.id)}>
+                    削除
+                </button>
+            </li>
+        );
         return (
-            <TodoPage {...this.state}
-                      todoList={this.filterTodoList()}
-                      handleFormTextChange={this.handleFormTextChange}
-                      handleFormSubmit={this.handleFormSubmit}
-                      handleFilterChange={this.handleFilterChange}
-                      handleActiveButtonClick={this.handleActiveButtonClick}
-                      handleCompleteButtonClick={this.handleCompleteButtonClick}
-                      handleDeleteButtonClick={this.handleDeleteButtonClick}
-            />
+            <>
+                <form onSubmit={this.handleFormSubmit}>
+                    <input type="text" value={this.state.text} onChange={this.handleFormTextChange}/>
+                    <button type={"submit"}>追加</button>
+                </form>
+
+                <div>
+                    <label>
+                        ALL:
+                        <input type={"radio"} value={TodoFilter.ALL}
+                               checked={this.state.filter === TodoFilter.ALL}
+                               onChange={this.handleFilterChange}/>
+                    </label>
+
+                    <label>
+                        ACTIVE:
+                        <input type={"radio"} value={TodoFilter.ACTIVE}
+                               checked={this.state.filter === TodoFilter.ACTIVE}
+                               onChange={this.handleFilterChange}/>
+                    </label>
+                    <label>
+                        COMPLETE:
+                        <input type={"radio"} value={TodoFilter.COMPLETE}
+                               checked={this.state.filter === TodoFilter.COMPLETE}
+                               onChange={this.handleFilterChange}/></label>
+                </div>
+                <ul>{todo}</ul>
+            </>
         )
     }
 }
