@@ -1,44 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React typescript todo
+```
+npx react-typescript-todo --typescript
+cd react-typescript-todo
+```
 
-## Available Scripts
+## propsにわたすときにスプレッド演算子で展開
+[JSX を深く理解する – React](https://ja.reactjs.org/docs/jsx-in-depth.html#spread-attributes)
 
-In the project directory, you can run:
+## Formを使う
+制御コンポーネントと非制御コンポートネントの２種類が存在する
+今回は制御されたコンポーネントで実装してみた。
+### 制御されたコンポーネント
+[フォーム – React](https://ja.reactjs.org/docs/forms.html#controlled-components)
 
-### `yarn start`
+FORMの状態（例えば、テキストやセレクトボックスの値）をstateで管理する方法。
+属性の変更があった場合に、ハンドラ関数を用いてstateで更新する。
+stateで管理することでバリデーションなどが、即時にできるなどの利点がある。
+それぞれの属性にハンドラ関数を用意する必要がある。
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 非制御コンポーネント
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[非制御コンポーネント – React](https://ja.reactjs.org/docs/uncontrolled-components.html)
+非制御コンポーネントでは制御されたコンポーネントとは異なり、formの状態をstateで管理しない。
+DOMのForm自身に状態を管理させる。
+refを利用して状態を取得することができる。
 
-### `yarn test`
+### 制御されたコンポーネントｖｓ非制御コンポーネント
+[Controlled and uncontrolled form inputs in React don't have to be complicated \- Gosha Arinich](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+リアルタイムにフィードバックを与えるようなフォームの場合は制御されたコンポーネントを使ったほうが良い。
+そういった用途がなければ非制御コンポーネントでも良い。
 
-### `yarn build`
+## Eventの型
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[EventCallback](https://qiita.com/Takepepe/items/f1ba99a7ca7e66290f24)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+全部anyでもいいかなと思ったけど、初めてなので書いてみることにした。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## setStateを使っていたらundefined
 
-### `yarn eject`
+[ES6でReact使ってたらsetStateがundefinedとか怒られた件 \- とっしぃのTech Memo](http://tossy-yukky.hatenablog.com/entry/2016/01/15/185338)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+少し理解が足りていない
