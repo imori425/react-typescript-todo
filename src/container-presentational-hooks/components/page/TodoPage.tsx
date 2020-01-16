@@ -16,7 +16,7 @@ export interface TodoPageProps {
 
 export const TodoPage: React.FC<TodoPageProps> = props => {
 
-    const todo = props.todoList.map(t => <li>
+    const todo = props.todoList.map((t,index) => <li key={index}>
             <span style={{textDecoration: t.status === TodoStatus.COMPLETE ? "line-through" : "unset"}}>{t.text}</span>
             {t.status === TodoStatus.ACTIVE &&
             <button onClick={() => props.handleCompleteButtonClick(t.id)}>完了</button>
