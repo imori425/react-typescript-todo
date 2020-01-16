@@ -119,6 +119,7 @@ export class TodoComponent extends React.Component<any, TodoState> {
         );
         return (
             <>
+                <h1>fat-component</h1>
                 <form onSubmit={this.handleFormSubmit}>
                     <input type="text" value={this.state.text} onChange={this.handleFormTextChange}/>
                     <button type={"submit"}>追加</button>

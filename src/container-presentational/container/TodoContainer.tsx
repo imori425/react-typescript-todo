@@ -105,15 +105,18 @@ export class TodoContainer extends React.Component<any, TodoState> {
 
     public render() {
         return (
-            <TodoPage {...this.state}
-                      todoList={this.filterTodoList()}
-                      handleFormTextChange={this.handleFormTextChange}
-                      handleFormSubmit={this.handleFormSubmit}
-                      handleFilterChange={this.handleFilterChange}
-                      handleActiveButtonClick={this.handleActiveButtonClick}
-                      handleCompleteButtonClick={this.handleCompleteButtonClick}
-                      handleDeleteButtonClick={this.handleDeleteButtonClick}
-            />
+            <>
+                <h1>container-presentational</h1>
+                <TodoPage {...this.state}
+                          todoList={this.filterTodoList()}
+                          handleFormTextChange={this.handleFormTextChange}
+                          handleFormSubmit={this.handleFormSubmit}
+                          handleFilterChange={this.handleFilterChange}
+                          handleActiveButtonClick={this.handleActiveButtonClick}
+                          handleCompleteButtonClick={this.handleCompleteButtonClick}
+                          handleDeleteButtonClick={this.handleDeleteButtonClick}
+                />
+            </>
         )
     }
 }
